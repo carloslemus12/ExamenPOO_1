@@ -46,7 +46,19 @@ public class Alumno extends Persona{
         } while (true);
     }
     
+    public Materia getMateria(String nombre){
+        for(Materia mat : this.materias)
+            if(mat.getNombre().equals(nombre))
+                return mat;
+        
+        return null;
+    }
     
+    public void eliminarMateria(Materia materia){
+        if (this.materias.contains(materia)) {
+            this.materias.remove(materia);
+        }
+    }
     
     public boolean PoseeMaterias(){
         return this.materias.size() > 0;
@@ -64,6 +76,57 @@ public class Alumno extends Persona{
     public void AddMateria(Materia materia){
         this.materias.add(materia);
     }
+    
+    public void MostrarMaterias(){
+        if (this.materias.size() > 0) {
+            String r = "";
+            boolean uso = false;
+            
+            for(Materia materia : this.materias){
+                if(uso) r += "\n";
+                
+                r += "Nombre: " + materia.getNombre()+ " Nota: " + materia.getNota();
+                
+                uso = true;
+            }
+            
+            Mensaje.Informativo("Informacion de las materias", r);
+                
+        } else
+            Mensaje.Errores("Informacion de las materias:", "No hay materias registrados");
+    }
+    
     public double ObtenerCum(){ return 0; }
-    public void MostrarAprobadas() {}
+    public void MostrarAprobadas() {
+        if (this.materias.size() > 0) {
+            String r = "";
+            boolean uso = false;
+            
+            for(Materia materia : this.materias){
+                if (!materia.Aprobado) continue;
+                
+                if(uso) r += "\n";
+                
+                r += "Nombre: " + materia.getNombre()+ " Nota: " + materia.getNota();
+                
+                uso = true;
+            }
+            
+            if (uso)
+                Mensaje.Informativo("Informacion de las materias", r);
+            else
+                Mensaje.Errores("Informacion de las materias:", "No hay materias aprovadas");
+            
+                
+        } else
+            Mensaje.Errores("Informacion de las materias:", "No hay materias registrados");
+    }
+
+    @Override
+    public String toString() {
+        String info = "Codigo: " + this.carnet + "\nNombre" + this.nombre + "\nFecha de nacimiento: " + super.fechaDeNacimiento.toString() + "\nNumero de materias: " + this.materias.size();
+        return info;
+    }
+    
+    
 }

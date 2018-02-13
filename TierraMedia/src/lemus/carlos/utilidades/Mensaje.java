@@ -18,6 +18,9 @@ public class Mensaje {
     public static final String TELEFONO = "^[2|7][0-9]{3}-[0-9]{4}$";
     public static final String CARNET = "^[A-Z]{2}[0-9]{6}$";
     public static final String FECHA = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$";
+    public static final String UVS = "^[1-4]$";
+    public static final String MATRICULA = "^[1-4]$";
+    public static final String NOTA = "^\\d+(?:\\.\\d{1,2})?$";
     
     // Mensaje para mostrar informacion ////////////////////////////////
     public static void Informativo(String titulo, String cuerpo){

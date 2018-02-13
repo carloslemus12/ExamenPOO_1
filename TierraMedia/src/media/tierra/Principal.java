@@ -62,7 +62,7 @@ public class Principal {
         this.alumnos.add(alumno);
     }
     
-    public void MostrarAlumno(){
+    public void MostrarAlumnos(){
         if (this.alumnos.size() > 0) {
             String r = "";
             boolean uso = false;
