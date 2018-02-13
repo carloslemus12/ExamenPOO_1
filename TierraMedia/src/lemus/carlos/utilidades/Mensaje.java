@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 public class Mensaje {
     // Validaciones
     public static final String TELEFONO = "^[2|7][0-9]{3}-[0-9]{4}$";
+    public static final String CARNET = "^[A-Z]{2}[0-9]{6}$";
+    public static final String FECHA = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$";
     
     // Mensaje para mostrar informacion ////////////////////////////////
     public static void Informativo(String titulo, String cuerpo){
@@ -78,36 +80,47 @@ public class Mensaje {
         return r;
     }
     
+    public static int Pregunta(String titulo, String cuerpo){
+        int r = JOptionPane.showConfirmDialog(null, cuerpo, titulo, JOptionPane.YES_NO_OPTION);
+        return r;
+    }
+    
     // ///////////////////////////////////////////////////////////////////
     
     // Obtener datos /////////////////////////////////////////////////////
-    public static String Texto(String cuerpo, String error){
+    public static String ObtenerTexto(String cuerpo, String defecto, boolean requerido){
         String resultado = "";
         
-        while(true){
-            resultado = (String) JOptionPane.showInputDialog(null, cuerpo);
+        do {
             
-            if(resultado == null || resultado.isEmpty())
-                Errores(error);
+            resultado = (String) JOptionPane.showInputDialog(null, cuerpo, defecto);
+            
+            // ES requerido y esta vacio
+            if (requerido && (resultado == null || resultado.isEmpty()))
+                Errores("Campo Obligatorio");
             else
                 break;
-        }
+            
+        } while (true);
         
         return resultado;
     }
     
-    public static String Texto(String cuerpo, String error, String patron, String errorPatron){
+    public static String ObtenerTexto(String cuerpo, String defecto, boolean requerido, String patron, String errorPatron){
         String resultado = "";
         
         Pattern p = Pattern.compile(patron);
         
-        
-        while(true){
-            resultado = (String) JOptionPane.showInputDialog(null, cuerpo);
+        do {
             
-            if(resultado == null || resultado.isEmpty())
-                Errores(error);
-            else{
+            resultado = (String) JOptionPane.showInputDialog(null, cuerpo, defecto);
+            
+            // ES requerido y esta vacio
+            if (requerido && (resultado == null || resultado.isEmpty()))
+                Errores("Campo Obligatorio");
+            else if(!requerido && (resultado == null || resultado.isEmpty()))
+                break;
+            else {
                 Matcher m = p.matcher(resultado);
                 
                 if (!m.matches())
@@ -115,46 +128,8 @@ public class Mensaje {
                 else
                     break;
             }
-        }
-        
-        return resultado;
-    }
-    
-    public static String Texto(String cuerpo, String defecto, String error){
-        String resultado = "";
-        
-        while(true){
-            resultado = (String) JOptionPane.showInputDialog(null, cuerpo, defecto);
             
-            if(resultado == null || resultado.isEmpty())
-                Errores(error);
-            else
-                break;
-        }
-        
-        return resultado;
-    }
-    
-    public static String Texto(String cuerpo, String defecto, String error, String patron, String errorPatron){
-        String resultado = "";
-        
-        Pattern p = Pattern.compile(patron);
-        
-        
-        while(true){
-            resultado = (String) JOptionPane.showInputDialog(null, cuerpo, defecto);
-            
-            if(resultado == null || resultado.isEmpty())
-                Errores(error);
-            else{
-                Matcher m = p.matcher(resultado);
-                
-                if (!m.matches())
-                    Errores(errorPatron);
-                else
-                    break;
-            }
-        }
+        } while (true);
         
         return resultado;
     }

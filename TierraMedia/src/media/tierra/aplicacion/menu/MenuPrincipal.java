@@ -5,9 +5,13 @@
  */
 package media.tierra.aplicacion.menu;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import lemus.carlos.utilidades.Mensaje;
 import lemus.carlos.utilidades.Menu;
 import media.tierra.Principal;
+import media.tierra.academico.Alumno;
 
 /**
  *
@@ -22,13 +26,40 @@ public class MenuPrincipal extends Menu{
         
         principal = new Principal();
         
-        super.AddOpcion("Alumnos", () -> {
+        super.AddOpcion("Añadir alumno", () -> {
             // Añadimos la opccion
-            Mensaje.Informativo("Hola", "Hola");
+            do {
+                
+                // Campos
+                String carnet, nombre;
+                Date fecha;
+                
+                // Obtenemos el carnet
+                carnet = principal.ObtenerCarnet();
+                
+                // Obtenemos el nombre
+                nombre = Mensaje.ObtenerTexto("Ingrese el nombre del estudiante", "", true);
+                
+                // Obtenemos la fehca
+                fecha = Alumno.ObtenerFechaNacimiento();
+                
+                principal.AddAlumno(new Alumno(carnet, nombre, fecha));
+                
+                Mensaje.Informativo(titulo, "Alumno ingresado con exito");
+                
+                if (Mensaje.Pregunta(titulo, "¿Desea continuar ingresando alumnos?") == JOptionPane.NO_OPTION)
+                    break;
+            } while (true);
         });
         
-        super.AddOpcion("Materias", () -> {
+        super.AddOpcion("Seleccionar alumno", () -> {
             // Añadimos la opccion
+            
+        });
+        
+        super.AddOpcion("Mostrar alumnos", () -> {
+            // Añadimos la opccion
+            principal.MostrarAlumno();
         });
     }   
 }

@@ -14,4 +14,8 @@ import java.util.Date;
 public class Persona {
     protected String nombre;
     protected Date fechaDeNacimiento;
+
+    public String getNombre() {
+        return nombre;
+    }
 }

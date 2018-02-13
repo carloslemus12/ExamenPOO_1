@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,9 +37,10 @@ public abstract class Menu {
                 // Obtenemos la eleccion
                 String eleccion = Mensaje.Opciones(titulo, "Opciones", elecciones.toArray(), "Debe de seleccionar alguna opcion");
                 
-                if (eleccion.equals("Atras"))
-                    break;
-                else
+                if (eleccion.equals("Atras")) {
+                    if (Mensaje.Pregunta(titulo, "¿Desea volver atras?") == JOptionPane.YES_OPTION)
+                        break;
+                } else
                     this.Eleccion(eleccion);
                 
             } else {
