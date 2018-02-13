@@ -73,7 +73,7 @@ public class Materia {
         
                 double u = Double.parseDouble(nota);
                 
-                if (u <= 0 && u > 10){
+                if (u <= 0 || u > 10){
                     Mensaje.Errores("Nota de la materia", "La noda no puede ser menor que 0 ni mayor que 10");
                     continue;
                 }
