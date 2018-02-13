@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tierramedia;
+package media.tierra.academico;
 
 /**
  *
  * @author MekakuZero
  */
-public class TierraMedia {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+public class Materia {
+    private String nombre;
+    private double nota;
+    private int uv;
+    boolean Aprobado;
 }
