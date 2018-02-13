@@ -47,6 +47,10 @@ public class MenuAlumno extends Menu {
             alumno.MostrarMaterias();
         });
         
+        super.AddOpcion("Modificar materia", () -> {
+            
+        });
+        
         super.AddOpcion("Ingresar materia", () -> {
             do {
                 String nombre;
