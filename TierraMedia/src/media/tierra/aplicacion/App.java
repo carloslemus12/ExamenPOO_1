@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package media.tierra;
-
-import java.util.List;
-import media.tierra.academico.Alumno;
+package media.tierra.aplicacion;
 
 /**
  *
  * @author MekakuZero
  */
-public class Principal {
-    private List<Alumno> alumnos;
-    
-    public void AddAlumno(){}
-    public void MostrarAlumno(){}
+public class App {
+    public static void main(String[] args){
+        
+    }
 }
