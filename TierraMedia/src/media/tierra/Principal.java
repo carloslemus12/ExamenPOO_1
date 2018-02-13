@@ -36,6 +36,15 @@ public class Principal {
         return carnet;
     }
     
+    public Alumno ObtenerAlumno(String carnet){
+        for(Alumno alumno : this.alumnos){
+            if (alumno.getCarnet().equals(carnet))
+                return alumno;
+        }
+        
+        return null;
+    }
+    
     public boolean ExisteCarnetEstudiantil(String carnet){
         for(Alumno alumno: this.alumnos){
             if (alumno.getCarnet().equals(carnet.toString())) {
@@ -44,6 +53,10 @@ public class Principal {
         }
         
         return false;
+    }
+    
+    public boolean HayAlumnos(){
+        return this.alumnos.size() > 0;
     }
     
     public void AddAlumno(Alumno alumno){

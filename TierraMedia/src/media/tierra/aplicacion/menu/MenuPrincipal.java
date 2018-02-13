@@ -54,12 +54,26 @@ public class MenuPrincipal extends Menu{
         
         super.AddOpcion("Seleccionar alumno", () -> {
             // Añadimos la opccion
-            
+            if (principal.HayAlumnos()) {
+                String carnet = Mensaje.ObtenerTexto("Carnet del estudiante", "", true, Mensaje.CARNET, "El carnet debe de tener XX000000");
+
+                if (principal.ExisteCarnetEstudiantil(carnet)) {
+
+                    Alumno alumno = principal.ObtenerAlumno(carnet);
+                    
+                } else
+                    Mensaje.Errores(titulo, "El carnet no existe");
+            } else
+                Mensaje.Errores(titulo, "No hay alumnos registrados");
         });
         
         super.AddOpcion("Mostrar alumnos", () -> {
             // Añadimos la opccion
             principal.MostrarAlumno();
+        });
+        
+        super.AddOpcion("Añadir datos por defecto", () -> {
+            
         });
     }   
 }
