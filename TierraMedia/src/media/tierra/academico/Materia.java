@@ -117,7 +117,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + "\nNota: " + nota + "\nUVS: " + uv + "\nAprobado: " + (Aprobado? "Aprovada" : "Reprovada") + "\nMatricula: " + matricula;
+        return "Nombre: " + nombre + "\nNota: " + nota + "\nUVS: " + uv + "\nAprobado: " + (Aprobado? "Aprobada" : "Reprobada") + "\nMatricula: " + matricula;
     }
     
     

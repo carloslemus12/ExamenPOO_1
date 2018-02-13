@@ -33,6 +33,7 @@ public class MenuAlumno extends Menu {
         super.AddOpcion("Modificar", new Opcion() {
             @Override
             public void Accion() {
+                
             }
         });
         
@@ -41,14 +42,14 @@ public class MenuAlumno extends Menu {
             public void Accion() {
             }
         });
-        
         super.AddOpcion("Ver CUM", new Opcion() {
             @Override
             public void Accion() {
+                alumno.ObtenerCum();
             }
         });
         
-        super.AddOpcion("Ver materias aprovadas", new Opcion() {
+        super.AddOpcion("Ver materias aprobadas", new Opcion() {
             @Override
             public void Accion() {
                 alumno.MostrarAprobadas();

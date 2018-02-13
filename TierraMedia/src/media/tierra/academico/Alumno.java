@@ -19,7 +19,7 @@ import media.tierra.generico.Persona;
 public class Alumno extends Persona{
     private String carnet;
     private List<Materia> materias;
-
+    private String cumbm;
     public Alumno(String carnet, String nombre, Date fecha) {
         this.materias = new ArrayList<>();
         this.carnet = carnet;
@@ -75,8 +75,7 @@ public class Alumno extends Persona{
     
     public void AddMateria(Materia materia){
         this.materias.add(materia);
-    }
-    
+    }    
     public void MostrarMaterias(){
         if (this.materias.size() > 0) {
             String r = "";
@@ -96,8 +95,46 @@ public class Alumno extends Persona{
             Mensaje.Errores("Informacion de las materias:", "No hay materias registrados");
     }
     
-    
-    public double ObtenerCum(){ return 0; }
+
+    public void ObtenerCum(){
+        int longi = 0;
+        for(Materia materia : this.materias){
+                if (!materia.Aprobado) continue;
+                longi +=1;
+            }
+        int[] UV = new int[longi];
+        double[] notas = new double[longi];
+        
+        if (this.materias.size() > 0){
+            double CUM;
+            String cumref;
+            double sumaCUM = 0;
+            int sumaUV = 0;
+            int longitud = 0;
+            int i = 0;
+
+            for(Materia materia : this.materias){
+                if (!materia.Aprobado) continue;
+                i++;
+                UV[i] = materia.getUv();
+                notas[i] = materia.getNota();
+                longitud += i;
+            }
+            for (int j = 0; j < longitud; j++) {
+                sumaCUM += (UV[j] * notas[j]);
+                sumaUV += UV[j];
+            }
+            CUM = (sumaCUM)/(sumaUV);
+            if ((CUM > 0) && (CUM <= 10)) {
+                cumref = String.valueOf(CUM);
+                Mensaje.Informativo("El CUM es: ",cumref);
+            }else{
+                 Mensaje.Errores("El CUM es:", "No hay materias aprobadas");
+            }
+        }else{
+            Mensaje.Errores("El CUM es:", "No hay materias registrados");
+        }
+    }
     public void MostrarAprobadas() {
         if (this.materias.size() > 0) {
             String r = "";
@@ -112,13 +149,10 @@ public class Alumno extends Persona{
                 
                 uso = true;
             }
-            
             if (uso)
                 Mensaje.Informativo("Informacion de las materias", r);
             else
-                Mensaje.Errores("Informacion de las materias:", "No hay materias aprovadas");
-            
-                
+                Mensaje.Errores("Informacion de las materias:", "No hay materias aprobadas");
         } else
             Mensaje.Errores("Informacion de las materias:", "No hay materias registrados");
     }

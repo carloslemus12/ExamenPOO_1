@@ -26,7 +26,6 @@ public class Mensaje {
     public static void Informativo(String titulo, String cuerpo){
         JOptionPane.showMessageDialog(null, cuerpo, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
-    
     public static void Informativo(String cuerpo){
         JOptionPane.showMessageDialog(null, cuerpo, "Informacion!", JOptionPane.INFORMATION_MESSAGE);
     }
