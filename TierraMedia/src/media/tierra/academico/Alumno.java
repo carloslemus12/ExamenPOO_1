@@ -96,6 +96,7 @@ public class Alumno extends Persona{
             Mensaje.Errores("Informacion de las materias:", "No hay materias registrados");
     }
     
+    
     public double ObtenerCum(){ return 0; }
     public void MostrarAprobadas() {
         if (this.materias.size() > 0) {
@@ -127,6 +128,4 @@ public class Alumno extends Persona{
         String info = "Codigo: " + this.carnet + "\nNombre" + this.nombre + "\nFecha de nacimiento: " + super.fechaDeNacimiento.toString() + "\nNumero de materias: " + this.materias.size();
         return info;
     }
-    
-    
 }

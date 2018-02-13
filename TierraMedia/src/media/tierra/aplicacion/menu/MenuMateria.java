@@ -5,8 +5,10 @@
  */
 package media.tierra.aplicacion.menu;
 
+import lemus.carlos.utilidades.Mensaje;
 import lemus.carlos.utilidades.Menu;
 import media.tierra.academico.Alumno;
+import media.tierra.academico.Materia;
 
 /**
  *
@@ -14,11 +16,40 @@ import media.tierra.academico.Alumno;
  */
 public class MenuMateria extends Menu{
     
+    private Materia materia;
     private Alumno alumno;
     
-    public MenuMateria(String titulo, Alumno alumno) {
-        super(titulo);
+    public MenuMateria(Alumno alumno, Materia materia) {
+        super("Opciones de " + materia.getNombre());
+        this.materia = materia;
         this.alumno = alumno;
+        
+        super.AddOpcion("Cambiar uvs", () -> {
+            int uv = Materia.obtenerUvs();
+            materia.setUv(uv);
+            Mensaje.Informativo(titulo, "Materia modificada");
+        });
+        
+        super.AddOpcion("Cambiar nota", () -> {
+            double nota = Materia.obtenerNota();
+            materia.setNota(nota);
+            Mensaje.Informativo(titulo, "Materia modificada");
+        });
+        
+        super.AddOpcion("Cambiar matricula", () -> {
+            int matricula = Materia.obtenerMatricula();
+            materia.setMatricula(matricula);
+            Mensaje.Informativo(titulo, "Materia modificada");
+        });
+        
+        super.AddOpcion("Eliminar", () -> {
+            alumno.eliminarMateria(materia);
+            Mensaje.Informativo(titulo, "Materia eliminada");
+        });
+        
+        super.AddOpcion("Detalles", () -> {
+            Mensaje.Informativo(titulo, this.materia.toString());
+        });
     }
     
 }

@@ -99,7 +99,26 @@ public class Materia {
         } while (true);
     }
 
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
+
+    public void setUv(int uv) {
+        this.uv = uv;
+    }
+
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
+    }
+    
     public int getMatricula() {
         return matricula;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + "\nNota: " + nota + "\nUVS: " + uv + "\nAprobado: " + (Aprobado? "Aprovada" : "Reprovada") + "\nMatricula: " + matricula;
+    }
+    
+    
 }

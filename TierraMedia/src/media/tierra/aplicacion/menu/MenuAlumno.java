@@ -48,7 +48,19 @@ public class MenuAlumno extends Menu {
         });
         
         super.AddOpcion("Modificar materia", () -> {
+            if (alumno.PoseeMaterias()) {
+                String nombre = Mensaje.ObtenerTexto("Nombre de la materia:", "", true);
             
+                if (!alumno.NombreMateriaUnico(nombre)) {
+                    
+                    Materia materia = alumno.getMateria(nombre);
+                    
+                    new MenuMateria(alumno, materia).Iniciar();
+                    
+                } else
+                    Mensaje.Errores(titulo, "No hay materias con dicho nombre");
+            } else
+                Mensaje.Errores(titulo, "No ha registrado ninguna materia");
         });
         
         super.AddOpcion("Ingresar materia", () -> {
