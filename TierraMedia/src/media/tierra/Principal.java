@@ -37,10 +37,9 @@ public class Principal {
     }
     
     public Alumno ObtenerAlumno(String carnet){
-        for(Alumno alumno : this.alumnos){
+        for(Alumno alumno : this.alumnos)
             if (alumno.getCarnet().equals(carnet))
                 return alumno;
-        }
         
         return null;
     }

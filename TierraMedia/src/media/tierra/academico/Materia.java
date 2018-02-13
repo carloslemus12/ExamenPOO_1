@@ -14,4 +14,40 @@ public class Materia {
     private double nota;
     private int uv;
     boolean Aprobado;
+    private int matricula;
+
+    public Materia(String nombre, double nota, int uv, int matricula) {
+        this.nombre = nombre;
+        this.nota = nota;
+        this.uv = uv;
+        this.matricula = matricula;
+        
+        this.Aprobado = nota >= 6.0;
+    }
+
+    public Materia(String nombre, double nota, int uv) {
+        this.nombre = nombre;
+        this.nota = nota;
+        this.uv = uv;
+        this.matricula = 1;
+        
+        this.Aprobado = nota >= 6.0;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public int getUv() {
+        return uv;
+    }
+
+    public boolean isAprobado() {
+        return Aprobado;
+    }
+    
 }

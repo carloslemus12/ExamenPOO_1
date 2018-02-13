@@ -46,7 +46,24 @@ public class Alumno extends Persona{
         } while (true);
     }
     
-    public void AddMateria(Materia materia){}
+    
+    
+    public boolean PoseeMaterias(){
+        return this.materias.size() > 0;
+    }
+    
+    public boolean NombreMateriaUnico(String nombre){
+        for(Materia mat : this.materias)
+            if(mat.getNombre().equals(nombre)){
+                return false;
+            }
+        
+        return true;
+    }
+    
+    public void AddMateria(Materia materia){
+        this.materias.add(materia);
+    }
     public double ObtenerCum(){ return 0; }
     public void MostrarAprobadas() {}
 }
