@@ -24,31 +24,48 @@ public class MenuMateria extends Menu{
         this.materia = materia;
         this.alumno = alumno;
         
-        super.AddOpcion("Cambiar uvs", () -> {
-            int uv = Materia.obtenerUvs();
-            materia.setUv(uv);
-            Mensaje.Informativo(titulo, "Materia modificada");
+        super.AddOpcion("Cambiar uvs", new Opcion() {
+            @Override
+            public void Accion() {
+                int uv = Materia.obtenerUvs();
+                materia.setUv(uv);
+                Mensaje.Informativo(titulo, "Materia modificada");
+            }
+            
         });
         
-        super.AddOpcion("Cambiar nota", () -> {
-            double nota = Materia.obtenerNota();
-            materia.setNota(nota);
-            Mensaje.Informativo(titulo, "Materia modificada");
+        super.AddOpcion("Cambiar nota", new Opcion(){
+            @Override
+            public void Accion() {
+                double nota = Materia.obtenerNota();
+                materia.setNota(nota);
+                Mensaje.Informativo(titulo, "Materia modificada");
+            }
+            
         });
         
-        super.AddOpcion("Cambiar matricula", () -> {
-            int matricula = Materia.obtenerMatricula();
-            materia.setMatricula(matricula);
-            Mensaje.Informativo(titulo, "Materia modificada");
+        super.AddOpcion("Cambiar matricula",new Opcion(){
+            @Override
+            public void Accion(){
+                int matricula = Materia.obtenerMatricula();
+                materia.setMatricula(matricula);
+                Mensaje.Informativo(titulo, "Materia modificada");
+            }
         });
         
-        super.AddOpcion("Eliminar", () -> {
-            alumno.eliminarMateria(materia);
-            Mensaje.Informativo(titulo, "Materia eliminada");
+        super.AddOpcion("Eliminar", new Opcion(){
+            @Override
+            public void Accion(){
+                alumno.eliminarMateria(materia);
+                Mensaje.Informativo(titulo, "Materia eliminada");
+            }
         });
         
-        super.AddOpcion("Detalles", () -> {
-            Mensaje.Informativo(titulo, this.materia.toString());
+        super.AddOpcion("Detalles", new Opcion(){
+            @Override
+            public void Accion(){
+                Mensaje.Informativo(titulo, materia.toString());
+            }
         });
     }
     

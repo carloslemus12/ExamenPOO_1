@@ -26,55 +26,67 @@ public class MenuPrincipal extends Menu{
         
         principal = new Principal();
         
-        super.AddOpcion("Añadir alumno", () -> {
-            // Añadimos la opccion
-            do {
-                
-                // Campos
-                String carnet, nombre;
-                Date fecha;
-                
-                // Obtenemos el carnet
-                carnet = principal.ObtenerCarnet();
-                
-                // Obtenemos el nombre
-                nombre = Mensaje.ObtenerTexto("Ingrese el nombre del estudiante", "", true);
-                
-                // Obtenemos la fehca
-                fecha = Alumno.ObtenerFechaNacimiento();
-                
-                principal.AddAlumno(new Alumno(carnet, nombre, fecha));
-                
-                Mensaje.Informativo(titulo, "Alumno ingresado con exito");
-                
-                if (Mensaje.Pregunta(titulo, "¿Desea continuar ingresando alumnos?") == JOptionPane.NO_OPTION)
-                    break;
-            } while (true);
+        super.AddOpcion("Añadir alumno", new Opcion(){
+            @Override
+            public void Accion(){
+                // Añadimos la opccion
+                do {
+
+                    // Campos
+                    String carnet, nombre;
+                    Date fecha;
+
+                    // Obtenemos el carnet
+                    carnet = principal.ObtenerCarnet();
+
+                    // Obtenemos el nombre
+                    nombre = Mensaje.ObtenerTexto("Ingrese el nombre del estudiante", "", true);
+
+                    // Obtenemos la fehca
+                    fecha = Alumno.ObtenerFechaNacimiento();
+
+                    principal.AddAlumno(new Alumno(carnet, nombre, fecha));
+
+                    Mensaje.Informativo(titulo, "Alumno ingresado con exito");
+
+                    if (Mensaje.Pregunta(titulo, "¿Desea continuar ingresando alumnos?") == JOptionPane.NO_OPTION)
+                        break;
+                } while (true);
+            }
         });
         
-        super.AddOpcion("Seleccionar alumno", () -> {
-            // Añadimos la opccion
-            if (principal.HayAlumnos()) {
-                String carnet = Mensaje.ObtenerTexto("Carnet del estudiante", "", true, Mensaje.CARNET, "El carnet debe de tener XX000000");
+        super.AddOpcion("Seleccionar alumno", new Opcion(){
+            @Override
+            public void Accion(){
+                // Añadimos la opccion
+                if (principal.HayAlumnos()) {
+                    String carnet = Mensaje.ObtenerTexto("Carnet del estudiante", "", true, Mensaje.CARNET, "El carnet debe de tener XX000000");
 
-                if (principal.ExisteCarnetEstudiantil(carnet)) {
+                    if (principal.ExisteCarnetEstudiantil(carnet)) {
 
-                    Alumno alumno = principal.ObtenerAlumno(carnet);
-                    
-                    new MenuAlumno(alumno).Iniciar();
+                        Alumno alumno = principal.ObtenerAlumno(carnet);
+
+                        new MenuAlumno(alumno).Iniciar();
+                    } else
+                        Mensaje.Errores(titulo, "El carnet no existe");
                 } else
-                    Mensaje.Errores(titulo, "El carnet no existe");
-            } else
-                Mensaje.Errores(titulo, "No hay alumnos registrados");
+                    Mensaje.Errores(titulo, "No hay alumnos registrados");
+            }
         });
         
-        super.AddOpcion("Mostrar alumnos", () -> {
-            // Añadimos la opccion
-            principal.MostrarAlumnos();
+        super.AddOpcion("Mostrar alumnos", new Opcion(){
+            @Override
+            public void Accion(){
+                // Añadimos la opccion
+                principal.MostrarAlumnos();
+            }
         });
         
-        super.AddOpcion("Añadir datos por defecto", () -> {
+        super.AddOpcion("Añadir datos por defecto", new Opcion(){
+            @Override
+            public void Accion(){
             
+            }
         });
     }   
 }
