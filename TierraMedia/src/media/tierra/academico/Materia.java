@@ -15,7 +15,7 @@ public class Materia {
     private String nombre;
     private double nota;
     private int uv;
-    boolean Aprobado;
+    private boolean Aprobado;
     private int matricula;
 
     public Materia(String nombre, double nota, int uv, int matricula) {
@@ -101,6 +101,7 @@ public class Materia {
 
     public void setNota(double nota) {
         this.nota = nota;
+        this.Aprobado = nota >= 6.0;
     }
 
     public void setUv(int uv) {

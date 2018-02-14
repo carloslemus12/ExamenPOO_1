@@ -5,7 +5,9 @@
  */
 package media.tierra;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import lemus.carlos.utilidades.Mensaje;
 import media.tierra.academico.Alumno;
@@ -43,6 +45,11 @@ public class Principal {
         
         return null;
     }
+   
+     public void eliminarAlumno(Alumno alumno){
+         if (this.alumnos.contains(alumno))
+             this.alumnos.remove(alumno);
+    }
     
     public boolean ExisteCarnetEstudiantil(String carnet){
         for(Alumno alumno: this.alumnos){
@@ -79,5 +86,29 @@ public class Principal {
                 
         } else
             Mensaje.Errores("Informacion de los alumnos:", "No hay alumnos registrados");
+    }
+    
+    public void CrearAlumnos(){
+        for (int i = 1; i <= 3; i++) {
+            try{
+                String carnet = "LG4" + (i + 1) + "2" + (i - 1) + "9" + (i + 5);
+                String nombre = "Alumno"+i;
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date fecha = sdf.parse("199" + i + "-02-01");
+                
+                Alumno a = new Alumno(carnet, nombre, fecha);
+                
+                a.generarMaterias();
+                
+                this.AddAlumno(a);
+            } catch(Exception e){
+                Mensaje.Errores("Gestion de los estudiantes", "No se han podido crear los alumnos");
+                return;
+            }
+        }
+        
+        Mensaje.Informativo("Gestion estudiantil", "Se han generado todos los usuarios");
     }
 }

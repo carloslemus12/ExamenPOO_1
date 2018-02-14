@@ -31,6 +31,30 @@ public class Alumno extends Persona{
         return carnet;
     }
     
+    public static Date ObtenerFechaNacimiento(String defecto){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = "";
+        do {
+            fecha = Mensaje.ObtenerTexto("Ingrese la fecha de cumpleaños", defecto, true, Mensaje.FECHA, "Debe digitar bien la fecha YYYY-MM-DD");
+            try{
+                Date nacimiento = sdf.parse(fecha);
+                return nacimiento;
+            } catch(Exception e){
+                Mensaje.Errores("Error inesperado");
+            }
+            
+        } while (true);
+    }
+    
+    public void generarMaterias(){
+        this.materias.add(new Materia("LEM", 8, 3));
+        this.materias.add(new Materia("POO", 9, 4));
+        this.materias.add(new Materia("FisMod2", 5.7, 4));
+        this.materias.add(new Materia("FisMod", 7.1, 4));
+        this.materias.add(new Materia("PCC", 7.7, 3));
+        this.materias.add(new Materia("Mate3", 9.5, 4));
+    }
+    
     public static Date ObtenerFechaNacimiento(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = "";
@@ -97,43 +121,32 @@ public class Alumno extends Persona{
     
 
     public void ObtenerCum(){
-        int longi = 0;
-        for(Materia materia : this.materias){
-                if (!materia.Aprobado) continue;
-                longi +=1;
-            }
-        int[] UV = new int[longi];
-        double[] notas = new double[longi];
-        
-        if (this.materias.size() > 0){
-            double CUM;
-            String cumref;
-            double sumaCUM = 0;
-            int sumaUV = 0;
-            int longitud = 0;
-            int i = 0;
-
-            for(Materia materia : this.materias){
-                if (!materia.Aprobado) continue;
-                i++;
-                UV[i] = materia.getUv();
-                notas[i] = materia.getNota();
-                longitud += i;
-            }
-            for (int j = 0; j < longitud; j++) {
-                sumaCUM += (UV[j] * notas[j]);
-                sumaUV += UV[j];
-            }
-            CUM = (sumaCUM)/(sumaUV);
-            if ((CUM > 0) && (CUM <= 10)) {
-                cumref = String.valueOf(CUM);
-                Mensaje.Informativo("El CUM es: ",cumref);
-            }else{
-                 Mensaje.Errores("El CUM es:", "No hay materias aprobadas");
-            }
-        }else{
-            Mensaje.Errores("El CUM es:", "No hay materias registrados");
+        if (this.materias.size() <= 0){
+            Mensaje.Errores("Gestion estudiantil", "No hay materias registradas");
+            return;
         }
+        
+        List<Materia> materiasAprovadas = new ArrayList<>();
+        
+        for(Materia materia : this.materias)
+            if(materia.isAprobado())
+                materiasAprovadas.add(materia);
+        
+        if (materiasAprovadas.size() <= 0){
+            Mensaje.Errores("Gestion estudiantil", "No hay materias aprivadas");
+            return;
+        }
+        
+        double merito = 0, valorativa = 0;
+        
+        for(Materia materia : materiasAprovadas){
+            merito += (materia.getNota() * materia.getUv());
+            valorativa += materia.getUv();
+        }
+            
+        double cum = merito / valorativa;
+        
+        Mensaje.Informativo("Gestion estudiantil", "CUM: " + cum);
     }
     public void MostrarAprobadas() {
         if (this.materias.size() > 0) {
@@ -141,7 +154,7 @@ public class Alumno extends Persona{
             boolean uso = false;
             
             for(Materia materia : this.materias){
-                if (!materia.Aprobado) continue;
+                if (!materia.isAprobado()) continue;
                 
                 if(uso) r += "\n";
                 
@@ -159,7 +172,9 @@ public class Alumno extends Persona{
 
     @Override
     public String toString() {
-        String info = "Codigo: " + this.carnet + "\nNombre" + this.nombre + "\nFecha de nacimiento: " + super.fechaDeNacimiento.toString() + "\nNumero de materias: " + this.materias.size();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        
+        String info = "Codigo: " + this.carnet + "\nNombre" + this.nombre + "\nFecha de nacimiento: " + format.format(super.fechaDeNacimiento) + "\nNumero de materias: " + this.materias.size();
         return info;
     }
 }

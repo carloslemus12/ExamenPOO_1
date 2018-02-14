@@ -5,9 +5,12 @@
  */
 package media.tierra.aplicacion.menu;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import lemus.carlos.utilidades.Mensaje;
 import lemus.carlos.utilidades.Menu;
+import media.tierra.Principal;
 import media.tierra.academico.Alumno;
 import media.tierra.academico.Materia;
 
@@ -18,9 +21,12 @@ import media.tierra.academico.Materia;
 public class MenuAlumno extends Menu {
     
     private Alumno alumno;
+    private Principal principal;
     
-    public MenuAlumno(Alumno alumno) {
+    public MenuAlumno(Principal principal, Alumno alumno) {
         super("Gestion del alumno: " + alumno.getNombre());
+        this.principal = principal;
+        
         this.alumno = alumno;
     
         super.AddOpcion("Mostrar detalle", new Opcion() {
@@ -33,13 +39,29 @@ public class MenuAlumno extends Menu {
         super.AddOpcion("Modificar", new Opcion() {
             @Override
             public void Accion() {
+                // Campos
+                String nombre;
+                Date fecha;
                 
+                // Obtenemos el nombre
+                nombre = Mensaje.ObtenerTexto("Ingrese el nombre del estudiante", alumno.getNombre(), true);
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+                
+                // Obtenemos la fehca
+                fecha = Alumno.ObtenerFechaNacimiento(format.format(alumno.getFechaDeNacimiento()));
+
+                alumno.setFechaDeNacimiento(fecha);
+                alumno.setNombre(nombre);
+
+                Mensaje.Informativo(titulo, "Alumno modificado con exito");
             }
         });
         
         super.AddOpcion("Eliminar", new Opcion() {
             @Override
             public void Accion() {
+                principal.eliminarAlumno(alumno);
             }
         });
         super.AddOpcion("Ver CUM", new Opcion() {

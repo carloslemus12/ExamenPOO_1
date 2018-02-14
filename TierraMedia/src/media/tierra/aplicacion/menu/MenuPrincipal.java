@@ -66,7 +66,7 @@ public class MenuPrincipal extends Menu{
 
                         Alumno alumno = principal.ObtenerAlumno(carnet);
 
-                        new MenuAlumno(alumno).Iniciar();
+                        new MenuAlumno(principal, alumno).Iniciar();
                     } else
                         Mensaje.Errores(titulo, "El carnet no existe");
                 } else
@@ -85,8 +85,8 @@ public class MenuPrincipal extends Menu{
         super.AddOpcion("Añadir datos por defecto", new Opcion(){
             @Override
             public void Accion(){
-            
+                principal.CrearAlumnos();
             }
         });
-    }   
+    }
 }
